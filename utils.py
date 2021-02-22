@@ -125,3 +125,14 @@ def get_app_access_token():
 def get_valid_filename(s):
     s = str(s)
     return sanitize_filename(s)
+
+def get_default_config():
+    global CONFIG
+    if not CONFIG:
+        _read_config()
+    if not CONFIG["defaults"]:
+        print("No default steamers added to config file")
+        return []
+    else:
+        defaults = CONFIG["defaults"]
+        return list(zip(defaults["streamers"], defaults["quality"]))
